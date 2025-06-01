@@ -8,7 +8,7 @@ services:
       pip install -r requirements.txt
       mkdir -p model_cache
       mkdir -p static
-    startCommand: gunicorn app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT --log-level info
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT --workers 4 --log-level info
     envVars:
       - key: HF_API_KEY
         sync: false
@@ -18,8 +18,6 @@ services:
         value: "1"
       - key: LOG_LEVEL
         value: "INFO"
-      - key: GUNICORN_CMD_ARGS
-        value: "--worker-class uvicorn.workers.UvicornWorker"
     healthCheckPath: /
     autoDeploy: true
     plan: free
