@@ -3,10 +3,12 @@ services:
     name: teach-me-in-my-language
     env: python
     pythonVersion: "3.11"
-    buildCommand: pip install -r requirements.txt
-    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    buildCommand: |
+      pip install -r requirements.txt
+      mkdir -p model_cache
+    startCommand: python run.py
     envVars:
       - key: HF_API_KEY
         sync: false
-      - key: PYTHONUNBUFFERED
-        value: "1" 
+      - key: PORT
+        value: "8000" 
