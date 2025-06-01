@@ -5,6 +5,10 @@ from fastapi.responses import FileResponse
 from app.routes.api import router
 import logging
 import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -39,11 +43,11 @@ async def read_root():
 async def startup_event():
     logger.info("Application starting up...")
     try:
-        # Test the translation service
-        from app.services.translate import translator
-        if translator is None:
-            logger.warning("Translation service is not available")
+        # Check for HuggingFace API key
+        hf_api_key = os.getenv("HF_API_KEY")
+        if not hf_api_key:
+            logger.warning("HuggingFace API key not found. Please set HF_API_KEY environment variable.")
         else:
-            logger.info("Translation service initialized successfully")
+            logger.info("HuggingFace API key found. Services should be available.")
     except Exception as e:
         logger.error(f"Error during startup: {str(e)}") 
