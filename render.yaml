@@ -8,7 +8,7 @@ services:
       pip install -r requirements.txt
       mkdir -p model_cache
       mkdir -p static
-    startCommand: gunicorn app:app --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:$PORT
+    startCommand: gunicorn -w 4 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:$PORT app:app
     envVars:
       - key: HF_API_KEY
         sync: false
