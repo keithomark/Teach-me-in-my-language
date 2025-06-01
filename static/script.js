@@ -3,6 +3,7 @@ async function generateExplanation() {
     const language = document.getElementById('language').value;
     const outputSection = document.getElementById('outputSection');
     const outputContent = document.getElementById('outputContent');
+    const generateBtn = document.querySelector('.generate-btn');
 
     if (!topic) {
         alert('Please enter a topic to learn about!');
@@ -12,6 +13,8 @@ async function generateExplanation() {
     // Show loading state
     outputSection.style.display = 'block';
     outputContent.innerHTML = '<div class="loading">Generating your desi explanation... 🚀</div>';
+    generateBtn.disabled = true;
+    generateBtn.textContent = 'Generating...';
 
     try {
         // First, get the explanation
@@ -24,7 +27,8 @@ async function generateExplanation() {
         });
 
         if (!explainResponse.ok) {
-            throw new Error('Failed to generate explanation');
+            const errorData = await explainResponse.json().catch(() => ({}));
+            throw new Error(errorData.detail || 'Failed to generate explanation');
         }
 
         const { explanation } = await explainResponse.json();
@@ -42,7 +46,8 @@ async function generateExplanation() {
         });
 
         if (!translateResponse.ok) {
-            throw new Error('Failed to translate explanation');
+            const errorData = await translateResponse.json().catch(() => ({}));
+            throw new Error(errorData.detail || 'Failed to translate explanation');
         }
 
         const { translated_text } = await translateResponse.json();
@@ -54,13 +59,21 @@ async function generateExplanation() {
                 <p>${translated_text}</p>
             </div>
         `;
+        
+        // Show confetti effect
+        createConfetti();
     } catch (error) {
         console.error('Error:', error);
         outputContent.innerHTML = `
             <div class="error">
-                Oops! Something went wrong. Please try again later. 🙏
+                <h3>Oops! Something went wrong 🙏</h3>
+                <p>${error.message || 'Please try again later.'}</p>
             </div>
         `;
+    } finally {
+        // Reset button state
+        generateBtn.disabled = false;
+        generateBtn.textContent = 'Break it down, please! 🚀';
     }
 }
 
