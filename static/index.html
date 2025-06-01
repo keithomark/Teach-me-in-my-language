@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teach Me In My Language</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="main-title">Teach Me In My Language 🇮🇳</h1>
+            <p class="subtitle">Want to actually understand your topics — in your own words, your own language? Let's make learning 🔥 and desi!</p>
+        </div>
+
+        <div class="learning-form">
+            <div class="input-group">
+                <label for="topic">What do you want to learn?</label>
+                <input 
+                    type="text" 
+                    id="topic" 
+                    class="topic-input" 
+                    placeholder="Type what you wanna learn... (e.g., 'Climate change' 🌍)"
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="language">Choose your vibe language:</label>
+                <select id="language" class="language-select">
+                    <option value="hindi">🇮🇳 Hindi</option>
+                    <option value="tamil">🐅 Tamil</option>
+                    <option value="telugu">🌾 Telugu</option>
+                    <option value="bengali">🪔 Bengali</option>
+                    <option value="marathi">🎭 Marathi</option>
+                    <option value="kannada">🏹 Kannada</option>
+                    <option value="gujarati">🌺 Gujarati</option>
+                    <option value="malayalam">🐘 Malayalam</option>
+                </select>
+            </div>
+
+            <button class="generate-btn" onclick="generateExplanation()">
+                Break it down, please! 🚀
+            </button>
+        </div>
+
+        <div class="output-section" id="outputSection" style="display: none;">
+            <div class="output-content" id="outputContent">
+                <div class="placeholder-text">Your desi explanation will pop up here... 👀</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            Made with ❤️ for India's future. Powered by IndiaAI Mission 🇮🇳
+        </div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html> 
