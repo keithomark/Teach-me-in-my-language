@@ -18,9 +18,10 @@ logger = logging.getLogger(__name__)
 
 def check_environment():
     """Check if all required environment variables and directories are set up."""
+    model_cache_dir = os.getenv("MODEL_CACHE_DIR", "model_cache")
     try:
         # Check required directories
-        required_dirs = ['model_cache', 'static']
+        required_dirs = [model_cache_dir, 'static']
         for dir_name in required_dirs:
             dir_path = Path(dir_name)
             if not dir_path.exists():
